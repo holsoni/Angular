@@ -1,0 +1,9 @@
+<p>Welcome to our site!</p>
+
+<div  class = "data" >
+  <ul *ngFor="let person of users" >
+    <li>{{ person.name }}, {{ person.lastname }}, {{ person.dateOfBirth }},
+      {{ person.salary }}, {{ person.workingHours }}, <a [routerLink]="['/blogs', person.id]">Go to details</a></li>
+
+  </ul>
+</div>

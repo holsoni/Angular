@@ -1,0 +1,22 @@
+<!--
+<nav>
+  <p> MENU </p>
+  <hr class="rounded">
+  <ul  class="menu">
+    <li  *ngFor="let item of menu">
+      <a (click)="menuClick(item.label)" [ngClass]="{'active': item.active}" href="#" >{{item.label}}</a></li>
+  </ul>
+</nav>
+-->
+<nav>
+  <p> MENU </p>
+  <hr class="rounded">
+  <ul  class="menu">
+    <li><a routerLink="/home" routerLinkActive="active" >Home</a></li>
+    <li><a [routerLink]="['/blogs',1]" routerLinkActive="active">Blogs</a></li>
+    <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
+    <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+  </ul>
+
+</nav>
+

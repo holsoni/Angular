@@ -5,8 +5,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LeftNavBarComponent } from './left-nav-bar/left-nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
-import {Routes} from "@angular/router";
-
+import {RouterLink, RouterOutlet} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {GalleryComponent} from "./gallery/gallery.component";
+import {AboutComponent} from "./about/about.component";
+import {BlogsComponent} from "./blogs/blogs.component";
+import {HomeComponent} from "./home/home.component";
+import { HoursPipePipe } from './hours-pipe.pipe';
 
 
 @NgModule({
@@ -14,10 +20,18 @@ import {Routes} from "@angular/router";
     AppComponent,
     HeaderComponent,
     LeftNavBarComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    GalleryComponent,
+    AboutComponent,
+    BlogsComponent,
+    PageNotFoundComponent,
+    HoursPipePipe,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

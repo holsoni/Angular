@@ -1,7 +1,9 @@
 body{
-  display: flex;
   height: 100%;
+  display: flex;
+  min-height: 100vh;
 }
+
 button{
   position: absolute;
   margin-top: 101px;
@@ -21,18 +23,11 @@ margin: -1px
 margin-left: 300px;
 }
 
-.cards{
-  align-content: stretch;
-  width:100px;
-  margin-left:900px;
-
+.view{
+  margin-left: 200px;
+  margin-top: 100px;
 }
 
-
-.grid{
-
-  align-content: stretch;
-  width:100px;
-  padding: 10px;
-  margin-left:100px;
+ul{
+  display: list-item;
 }

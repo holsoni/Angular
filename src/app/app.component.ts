@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
   title = 'BestRecreation.';
   userInfo = "Miss. S"
@@ -26,32 +26,81 @@ export class AppComponent {
     {label:"About", active:false},
     {label:"Contacts", active:false}];
 
-
-  data:any = [{
-    name: "Goverla",
-    place: "Zakarpattia",
-    imgUrl:"https://karpatium.com.ua/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBa0VIIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--672de41986b3eb3547d1cf8a50a6ac8ae4b3d4ba/%D0%B3%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0-%D0%B3%D0%BE%D1%80%D0%B0.jpeg?disposition=attachment",
-    rating:"4.9 ",
-    type:"1",
-    visibility:true
-
-  },
+  users = [
     {
-      name: "Synevir Lake",
-      place: "Zakarpattia",
-      imgUrl:"https://jivavoda.com.ua/upload/blog/1_article-ozero.jpg",
-      rating:"4.7",
-      type:"1",
-      visibility:true
+      id: 1,
+      name: 'Victor',
+      lastname: 'Velichko',
+      dateOfBirth: new Date("2/1/1990"),
+      salary: 50000,
+      workingHours: 123456789
+    },{
+      id: 2,
+      name: 'Anna',
+      lastname: 'Melnyk',
+      dateOfBirth: new Date("5/6/1997"),
+      salary: 60000,
+      workingHours: 300
+    },{
+      id: 3,
+      name: 'Serhii',
+      lastname: 'Bandura',
+      dateOfBirth: new Date("12/11/2001"),
+      salary: 35000,
+      workingHours: 234
+    },{
+      id: 4,
+      name: 'Hanna',
+      lastname: 'Runykova',
+      dateOfBirth: new Date("3/10/1998"),
+      salary: 12000,
+      workingHours: 100
+    },{
+      id: 5,
+      name: 'John',
+      lastname: 'Smith',
+      dateOfBirth: new Date("8/12/1985"),
+      salary: 75000,
+      workingHours: 250
+    },{
+      id: 6,
+      name: 'Sarah',
+      lastname: 'Johnson',
+      dateOfBirth: new Date("8/5/1992"),
+      salary: 53000,
+      workingHours: 140
+    },{
+      id: 7,
+      name: 'David',
+      lastname: 'Lee',
+      dateOfBirth: new Date("2/17/1997"),
+      salary: 90000,
+      workingHours: 1834534520
+    },{
+      id: 8,
+      name: 'Emily',
+      lastname: 'Nguyen',
+      dateOfBirth: new Date("5/28/1995"),
+      salary: 55000,
+      workingHours: 120000
+    },{
+      id: 9,
+      name: 'Mia',
+      lastname: 'Garcia',
+      dateOfBirth: new Date("1/1/2000"),
+      salary: 45000,
+      workingHours: 500670000
+    },{
+      id: 10,
+      name: 'Kate',
+      lastname: 'Doe',
+      dateOfBirth: new Date("6/6/1980"),
+      salary: 88000,
+      workingHours: 1000043400
+    }];
 
-    },
-    {
-      name: "Silver waterfalls",
-      place: "Shesory",
-      imgUrl:"https://kosiv.life/files_ci/561/caption__large.jpg",
-      rating:"4.7",
-      type:"2",
-      visibility:true
-    }]
+    ngOnInit(){
+      localStorage.setItem('users', JSON.stringify(this.users));
+    }
 
 }

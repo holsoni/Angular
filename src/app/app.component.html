@@ -3,34 +3,9 @@
             [userName] = "userInfo"
             (event)="show()">
 </app-header>
-<div [ngStyle]="{'font-size':'36px', 'color': 'red', 'align':'center','margin-top':'100px','margin-left':'790px'}">
-  <p  *ngIf="greeting.show" > {{greeting.text}}</p>
-</div>
-<app-left-nav-bar [menu] = "menu" (event)="menu = $event"></app-left-nav-bar>
-<button (click) = "changeView()">Change view</button>
-<div class = 'items' >
-  <ng-container *ngFor = "let item of data" >
-    <div *ngIf="list == true; else another" >
-      <div *ngIf = "item.visibility != false" class="cards" >
-        <div [ngSwitch]="item.type">
-          <img [ngStyle]="{'width':'150px','height':'150px'}" src="{{item.imgUrl}}">
-          <p>{{item.name}}</p>
-          <p *ngSwitchCase="'1'" [ngStyle]="{color:'blue'}" >{{item.place}}</p>
-          <p *ngSwitchCase="'2'" [ngStyle]="{color:'orange'}" >{{item.place}}</p>
-          <p *ngSwitchCase="'3'" [ngStyle]="{color:'yellow'}" ]>{{item.place}}</p>
-          <p>{{item.rating}}</p>
-        </div>
-      </div>
-    </div>
-    <ng-template #another>
-      <div class = 'grid'><img [ngStyle]="{'width':'150px','height':'150px'}" src="{{item.imgUrl}}">
-        <p>{{item.name}}</p>
-        <p>{{item.place}}</p>
-        <p>{{item.rating}}</p>
-      </div>
-    </ng-template>
-  </ng-container>
-</div>
 
+<app-left-nav-bar></app-left-nav-bar>
+
+<router-outlet class="main"></router-outlet>
 <app-footer [menu]="menu"></app-footer>
 </body>
