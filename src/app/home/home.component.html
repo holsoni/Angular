@@ -1,9 +1,75 @@
-<p>Welcome to our site!</p>
 
 <div  class = "data" >
-  <ul *ngFor="let person of users" >
-    <li>{{ person.name }}, {{ person.lastname }}, {{ person.dateOfBirth }},
-      {{ person.salary }}, {{ person.workingHours }}, <a [routerLink]="['/blogs', person.id]">Go to details</a></li>
+  <div class = "form-view">
+  <form [formGroup]="profileFbForm" (ngSubmit)="onSubmit()">
+    <label for="first-name">First Name: </label>
+    <input id="first-name" required type="text" formControlName="firstName">
+    <div class = 'alert' *ngIf="profileFbForm.get('firstName')?.invalid && profileFbForm.get('firstName')?.touched">
+      <small *ngIf="profileFbForm.get('firstName')?.errors?.['required']">Name field is required</small>
+    </div>
 
-  </ul>
+    <label for="last-name">Last Name: </label>
+    <input id="last-name"  required type="text" formControlName="lastName">
+    <div class = 'alert' *ngIf="profileFbForm.get('lastName')?.invalid &&  profileFbForm.get('lastName')?.touched">
+      <small *ngIf="profileFbForm.get('lastName')?.errors?.['required']">Last Name field is required</small>
+    </div>
+
+    <div class="select-area">
+      <label for="type">Type: </label>
+      <select id="type" formControlName="type">
+        <option value="value1">Value1</option>
+        <option value="value2" selected>Value2</option>
+        <option value="value3">Value3</option></select>
+    </div>
+    <label for="email">Email: </label>
+    <input id="email" required type="text" formControlName="email">
+    <div class = 'alert' *ngIf="profileFbForm.get('email')?.invalid && profileFbForm.get('email')?.touched">
+      <small *ngIf="profileFbForm.get('email')?.errors">Email is required: example@domain.com</small>
+    </div>
+
+    <label for="password">Password: </label>
+    <input id="password" required type="password" formControlName="password">
+    <div class = 'alert' *ngIf="profileFbForm.get('password')?.invalid && profileFbForm.get('password')?.touched">
+      <small *ngIf="profileFbForm.get('password')?.errors">Password is required and has to include small and capital letters,numbers & special symbols.</small>
+    </div>
+
+    <label for="confirmPassword">Confirm Password: </label>
+    <input id="confirmPassword" required type="password" formControlName="confirmedPassword" (input)="checkPassword()">
+    <div class = 'alert' *ngIf="profileFbForm.get('confirmPassword')?.invalid">
+      <small *ngIf="profileFbForm.get('confirmPassword')?.errors">Passwords are not the same.</small>
+    </div>
+
+    <div formArrayName="subjects" class="subjects">
+        <div class="subject-buttons">
+          <label for="confirmPassword">Subjects: </label>
+          <button type="button" (click)="addSubject()"> Add</button>
+          <button type="button" (click)="removeAllSubjects()"> Remove All</button>
+        </div>
+      <ng-container *ngFor="let subject of subjects.controls; let i = index">
+        <label for="subj-{{i}}">Subject {{i + 1}}</label>
+        <div id="subject-field">
+        <input type="text" id="subj-{{i}}" [formControlName]="i">
+        <button type="button" (click)="removeSubject(i)"> <img width="15" height="15" src="http://www.clker.com/cliparts/X/R/M/R/6/y/dark-green-cross-mark-hi.png"> </button>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="description">
+      <label for="description">Description: </label>
+      <input id="description" type="text" formControlName="description">
+    </div>
+    <div class="gender">
+      <label >Gender: </label>
+      <input id="male" type="checkbox"  (change)="onCheckboxChange($event)">
+      <label for="male">Male </label>
+      <input id="female" type="checkbox"   (change)="onCheckboxChange($event)">
+      <label for="female">Female </label>
+
+    </div>
+
+    <label for="phone">Phone: </label>
+    <input id="phone" required type="text" formControlName="phone">
+    <div class = "submit_cont"><button [disabled]="!profileFbForm.valid" class = "submit" type="submit">Submit</button></div>
+  </form>
+</div>
 </div>

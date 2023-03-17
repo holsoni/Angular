@@ -13,6 +13,7 @@ import {AboutComponent} from "./about/about.component";
 import {BlogsComponent} from "./blogs/blogs.component";
 import {HomeComponent} from "./home/home.component";
 import { HoursPipePipe } from './hours-pipe.pipe';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -28,11 +29,12 @@ import { HoursPipePipe } from './hours-pipe.pipe';
     PageNotFoundComponent,
     HoursPipePipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule
 
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

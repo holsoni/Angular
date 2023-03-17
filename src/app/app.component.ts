@@ -26,6 +26,7 @@ export class AppComponent implements OnInit{
     {label:"About", active:false},
     {label:"Contacts", active:false}];
 
+/*
   users = [
     {
       id: 1,
@@ -98,9 +99,10 @@ export class AppComponent implements OnInit{
       salary: 88000,
       workingHours: 1000043400
     }];
+*/
 
     ngOnInit(){
-      localStorage.setItem('users', JSON.stringify(this.users));
+     // localStorage.setItem('users', JSON.stringify(this.users));
     }
 
 }
