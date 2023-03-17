@@ -33,10 +33,12 @@
       <small *ngIf="profileFbForm.get('password')?.errors">Password is required and has to include small and capital letters,numbers & special symbols.</small>
     </div>
 
-    <label for="confirmPassword">Confirm Password: </label>
-    <input id="confirmPassword" required type="password" formControlName="confirmedPassword" (input)="checkPassword()">
-    <div class = 'alert' *ngIf="profileFbForm.get('confirmPassword')?.invalid">
-      <small *ngIf="profileFbForm.get('confirmPassword')?.errors">Passwords are not the same.</small>
+    <div *ngIf="checkProfileExistence">
+      <label for="confirmPassword">Confirm Password: </label>
+      <input id="confirmPassword" required type="password" formControlName="confirmedPassword" (input)="checkPassword()">
+      <div class = 'alert' *ngIf="profileFbForm.get('confirmPassword')?.invalid">
+        <small *ngIf="profileFbForm.get('confirmPassword')?.errors">Passwords are not the same.</small>
+      </div>
     </div>
 
     <div formArrayName="subjects" class="subjects">

@@ -88,8 +88,8 @@ export class HomeComponent implements OnInit{
   }
 
   checkPassword() {
-    const password = this.profileFbForm.get('password')?.value;
-    const confirmedPassword = this.profileFbForm.get('confirmedPassword')?.value;
+    let password = this.profileFbForm.get('password')?.value;
+    let confirmedPassword = this.profileFbForm.get('confirmedPassword')?.value;
 
     if (password === confirmedPassword) {
       this.profileFbForm.get('confirmedPassword')?.setErrors(null);
@@ -98,6 +98,14 @@ export class HomeComponent implements OnInit{
     }
   }
 
+  checkProfileExistence():boolean{
+      let name = this.profileFbForm.get('firstName')?.value;
+      let lastName = this.profileFbForm.get('lastName')?.value;
 
+      let profile = this.users.find(prof => prof.firstName.toLowerCase() === name?.toLowerCase()
+        && prof.lastName.toLowerCase() === lastName?.toLowerCase());
+
+      return profile === null ? false : true;
+  }
 
 }
