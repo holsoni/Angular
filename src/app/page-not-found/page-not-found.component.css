@@ -10,18 +10,21 @@ body{
   background-color: #eeeeee;
   left:0;
   top:0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 
 }
 p{
   position: fixed;
   margin-top: 300px;
-  margin-left: 660px;
+
 }
 
 button{
   position: fixed;
   margin-top: 400px;
-  margin-left: 800px;
+
   display: inline-block;
   outline: none;
   cursor: pointer;

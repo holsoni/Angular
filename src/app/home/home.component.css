@@ -45,6 +45,7 @@ textarea {
   box-sizing: border-box;
 }
 input:valid,
+input.ng-untouched,
 select,
 textarea {
   border: 2px solid #333;
@@ -56,6 +57,7 @@ input.ng-invalid.ng-touched{
   border-radius: 0.25rem;
   background-color: white;
 }
+
 input[type="text"],
 input[type="email"],
 select,

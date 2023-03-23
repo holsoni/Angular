@@ -5,13 +5,13 @@
     <label for="first-name">First Name: </label>
     <input id="first-name" required type="text" formControlName="firstName">
     <div class = 'alert' *ngIf="profileFbForm.get('firstName')?.invalid && profileFbForm.get('firstName')?.touched">
-      <small *ngIf="profileFbForm.get('firstName')?.errors?.['required']">Name field is required</small>
+      <small>Name field is required.</small>
     </div>
 
     <label for="last-name">Last Name: </label>
-    <input id="last-name"  required type="text" formControlName="lastName">
+    <input id="last-name"  required type="text" formControlName="lastName" (change)="checkProfileExistence()">
     <div class = 'alert' *ngIf="profileFbForm.get('lastName')?.invalid &&  profileFbForm.get('lastName')?.touched">
-      <small *ngIf="profileFbForm.get('lastName')?.errors?.['required']">Last Name field is required</small>
+      <small>Last Name field is required.</small>
     </div>
 
     <div class="select-area">
@@ -24,20 +24,20 @@
     <label for="email">Email: </label>
     <input id="email" required type="text" formControlName="email">
     <div class = 'alert' *ngIf="profileFbForm.get('email')?.invalid && profileFbForm.get('email')?.touched">
-      <small *ngIf="profileFbForm.get('email')?.errors">Email is required: example@domain.com</small>
+      <small>Email is required: example@domain.com.</small>
     </div>
 
     <label for="password">Password: </label>
     <input id="password" required type="password" formControlName="password">
     <div class = 'alert' *ngIf="profileFbForm.get('password')?.invalid && profileFbForm.get('password')?.touched">
-      <small *ngIf="profileFbForm.get('password')?.errors">Password is required and has to include small and capital letters,numbers & special symbols.</small>
+      <small>Password is required and has to include small and capital letters,numbers & special symbols.</small>
     </div>
-
-    <div *ngIf="checkProfileExistence">
+  <!-- // -->
+    <div *ngIf="!profileExisting">
       <label for="confirmPassword">Confirm Password: </label>
-      <input id="confirmPassword" required type="password" formControlName="confirmedPassword" (input)="checkPassword()">
-      <div class = 'alert' *ngIf="profileFbForm.get('confirmPassword')?.invalid">
-        <small *ngIf="profileFbForm.get('confirmPassword')?.errors">Passwords are not the same.</small>
+      <input id="confirmPassword" type="password" formControlName="confirmedPassword">
+      <div class = 'alert'  *ngIf="profileFbForm.errors?.['passwordNotConfirmed'] && profileFbForm.get('confirmedPassword')?.touched">
+        <small>Passwords are not the same.</small>
       </div>
     </div>
 
@@ -62,16 +62,24 @@
     </div>
     <div class="gender">
       <label >Gender: </label>
-      <input id="male" type="checkbox"  (change)="onCheckboxChange($event)">
+      <input id="male" type="checkbox" [checked]="checkBoxValue" (change)="onCheckboxChange($event)">
       <label for="male">Male </label>
-      <input id="female" type="checkbox"   (change)="onCheckboxChange($event)">
+      <input id="female" type="checkbox" [checked]="checkBoxValue"  (change)="onCheckboxChange($event)">
       <label for="female">Female </label>
 
     </div>
 
     <label for="phone">Phone: </label>
-    <input id="phone" required type="text" formControlName="phone">
-    <div class = "submit_cont"><button [disabled]="!profileFbForm.valid" class = "submit" type="submit">Submit</button></div>
+    <input id="phone" required type="text" formControlName="phone" >
+    <div class = 'alert' *ngIf="profileFbForm.get('phone')?.invalid && profileFbForm.get('phone')?.touched">
+      <small>Phone is required and has to be in this format +380995678278.</small>
+    </div>
+
+    <div [ngSwitch]="profileExisting" class = "submit_cont">
+      <button  *ngSwitchCase="false" [disabled]="!profileFbForm.valid" class = "submit" type="submit">Submit</button>
+      <button *ngSwitchCase="true"  [disabled]="!profileFbForm.valid" class = "submit" type="submit">Sign in</button>
+    </div>
+  <!--  (mouseenter)="signIn()" (mouseleave)="wrongDataFalse()"-->
   </form>
 </div>
 </div>

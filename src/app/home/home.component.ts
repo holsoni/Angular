@@ -1,6 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
 import { v4 as uuidv4 } from 'uuid';
+import {elementAt} from "rxjs";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,7 +19,21 @@ import { v4 as uuidv4 } from 'uuid';
 export class HomeComponent implements OnInit{
 
   users:any[] = [];
-  submitted: boolean = false;
+  signedIn:any[] = [];
+  checked:boolean = false;
+  profileExisting:boolean = false;
+  wrongData:boolean = false;
+  confirmedPasswordvalidation: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    let password = control.get('password');
+    let confirmedPassword = control.get('confirmedPassword');
+
+    if(!this.profileExisting){
+      return password && confirmedPassword && password.value != confirmedPassword.value ?
+        { passwordNotConfirmed: true } : null;
+    }
+    else return null;
+  };
+
   profileFbForm = this.fb.group(
     {id: undefined,
       firstName:['firstName', Validators.required],
@@ -21,13 +45,19 @@ export class HomeComponent implements OnInit{
       subjects:this.fb.array([]),
     description:['description'],
       sex: ['sex'],
-      phone: ['phone', Validators.pattern(/^\+380\d{9}$/)],
-  })
+      phone: ['phone', Validators.pattern(/^\+380\d{9}$/)]
+  },{ validators: this.confirmedPasswordvalidation })
+
+
+
+
   constructor(private fb:FormBuilder) {
   }
   ngOnInit(){
+
   }
-   validatePassword() : ValidatorFn {
+   validatePassword() : ValidatorFn  {
+
   return (c: AbstractControl) => {
     if(c.value && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[*.?%;_])[A-Za-z\d*.?%;_]{6,}$/.test(c.value)) {
       return null;
@@ -40,31 +70,45 @@ export class HomeComponent implements OnInit{
     }
   }}
 
-/*  validateConfirmedPassword(): ValidatorFn = ValidationErrors | null => {
-    let pass = this.profileFbForm.get('password')?.value;
-    let confirmPass = this.profileFbForm.get('confirmedPassword')?.value;
-    return pass === confirmPass ? null : { notSame: true }
-  }*/
+
+
   onSubmit() {
     this.addProfile();
-    console.log(this.users);
     this.resetForm();
-    if (this.profileFbForm.valid) {
-      console.log('form submitted');
-    }
-    this.submitted = true;
+    console.log("users: ")
+    console.log(this.users);
+    console.log("signed users: ")
+    console.log(this.signedIn);
+
+
   }
 
   resetForm(){
     this.profileFbForm.reset();
     this.subjects.clear();
+    this.checked = false;
+    this.profileFbForm.get('confirmedPassword')?.setValidators(Validators.required);
+
+  }
+
+  get checkBoxValue(){
+    return this.checked;
   }
 
   addProfile(){
-    let newProfile = this.profileFbForm.value;
-    newProfile.id = uuidv4();
-    console.log(newProfile);
-    this.users.push(newProfile);
+    if(this.profileExisting){
+      let newProfile = this.profileFbForm.value;
+      newProfile.id = this.signedUserId;
+      this.signedIn.push(this.profileFbForm.value)
+    }
+    else{
+      let newProfile = this.profileFbForm.value;
+      newProfile.id = uuidv4();
+      console.log(newProfile);
+      this.users.push(newProfile);
+    }
+
+
   }
   get subjects(){
     return this.profileFbForm.get('subjects') as FormArray;
@@ -87,25 +131,73 @@ export class HomeComponent implements OnInit{
 
   }
 
-  checkPassword() {
-    let password = this.profileFbForm.get('password')?.value;
-    let confirmedPassword = this.profileFbForm.get('confirmedPassword')?.value;
-
-    if (password === confirmedPassword) {
-      this.profileFbForm.get('confirmedPassword')?.setErrors(null);
-    } else {
-      this.profileFbForm.get('confirmedPassword')?.setErrors({ mismatch: true });
-    }
-  }
-
   checkProfileExistence():boolean{
+    if(this.users.length > 0) {
       let name = this.profileFbForm.get('firstName')?.value;
       let lastName = this.profileFbForm.get('lastName')?.value;
-
       let profile = this.users.find(prof => prof.firstName.toLowerCase() === name?.toLowerCase()
         && prof.lastName.toLowerCase() === lastName?.toLowerCase());
 
-      return profile === null ? false : true;
+
+      if(profile != null){
+       // console.log("checkProfileEx TRUE" );
+        console.log(profile.id);
+        this.profileExisting = true;
+        this.profileFbForm.get('confirmedPassword')?.clearValidators();
+        this.profileFbForm.get('confirmedPassword')?.updateValueAndValidity();
+
+        return true;
+      }
+      else {
+      //  console.log("checkProfileEx FALSE" );
+        this.profileExisting = false;
+      }
+
+    }
+  //  console.log(this.profileExisting);
+    return false;
+  }
+
+  signIn():boolean {
+    let inpPassword = this.profileFbForm.get('password')?.value;
+    let inpEmail = this.profileFbForm.get('email')?.value;
+    let name = this.profileFbForm.get('firstName')?.value;
+    let lastName = this.profileFbForm.get('lastName')?.value;
+    let profile = this.users.find(prof => prof.firstName.toLowerCase() === name?.toLowerCase()
+      && prof.lastName.toLowerCase() === lastName?.toLowerCase());
+    let password = profile.password;
+    let email = profile.email;
+
+    console.log("password: "+ password);
+    console.log("email: "+email);
+    console.log("inp password: "+ inpPassword);
+    console.log("inp email: "+inpEmail);
+
+    if (password.toString() == inpPassword?.toString() && email.toString() == inpEmail?.toString()){
+      console.log("You can sign in")
+      this.wrongData = false;
+      return false;
+    }
+    else {
+      this.wrongData = true;
+    }
+
+    console.log(this.wrongData);
+    return false;
+  }
+
+
+  get signedUserId():string{
+    let name = this.profileFbForm.get('firstName')?.value;
+    let lastName = this.profileFbForm.get('lastName')?.value;
+    let profile = this.users.find(prof => prof.firstName.toLowerCase() === name?.toLowerCase()
+      && prof.lastName.toLowerCase() === lastName?.toLowerCase());
+
+    return profile.id;
+  }
+
+   wrongDataFalse(){
+      this.wrongData = false;
   }
 
 }
