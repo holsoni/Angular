@@ -14,7 +14,7 @@ import {BlogsComponent} from "./blogs/blogs.component";
 import {HomeComponent} from "./home/home.component";
 import { HoursPipePipe } from './hours-pipe.pipe';
 import {ReactiveFormsModule} from "@angular/forms";
-
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     imports: [
         BrowserModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FlexLayoutModule
 
     ],
   providers: [],

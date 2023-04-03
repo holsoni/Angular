@@ -1,3 +1,4 @@
+<!--
 <footer>
   <div class = "copyright">
     © Copyright Best Places Ltd 2023
@@ -11,5 +12,19 @@
   </div>
   <div class="menu">
 
+  </div>
+</footer>
+-->
+<footer class="footer" fxFill fxLayout="row" fxLayoutAlign="space-between center"
+        fxLayout.xs="column" fxLayoutAlign.xs="center center">
+  <div fxLayout="column" class="copyright">
+    © Copyright Best Places Ltd
+    <a href="#">BestRec</a>
+  </div>
+  <div class="menu" fxLayout="row" fxLayoutGap="10" fxLayoutAlign="space-between center">
+    <p><a routerLink="/home" routerLinkActive="active">Home</a></p>
+    <p><a [routerLink]="['/blogs',1]" routerLinkActive="active">Blogs</a></p>
+    <p><a routerLink="/gallery" routerLinkActive="active">Gallery</a></p>
+    <p><a routerLink="/about" routerLinkActive="active">About</a></p>
   </div>
 </footer>

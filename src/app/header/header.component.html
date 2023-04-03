@@ -1,14 +1,19 @@
-<header>
-
+<!--<header>
 <div>
-
   <img (click)="onEvent()" class = "logo" src = "https://edmundston.ca/download_file/view_inline/2137">
   <div class = "name">
     {{siteName}}
   </div>
-
-
 </div>
+</header>-->
 
-
+<header style="top:0;left:0" fxLayout="row" fxLayoutAlign="space-between center" fxFill  >
+  <div fxLayoutAlign="start center">
+    <img fxFlex = "10" (click)="onEvent()" class="logo" src="https://edmundston.ca/download_file/view_inline/2137">
+    <div fxFlex="grow" class="name">{{siteName}}</div>
+  </div>
+  <div fxLayout="row"  class="user" >
+    <img fxFlex = "1vw " src="https://icon-library.com/images/users-icon-png/users-icon-png-3.jpg">
+    <a href="#">{{userName}}</a>
+  </div>
 </header>

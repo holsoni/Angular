@@ -1,11 +1,15 @@
-<body>
 <app-header [siteName] = "title"
             [userName] = "userInfo"
             (event)="show()">
 </app-header>
 
+<div style="display: flex; flex-wrap: wrap;">
+
 <app-left-nav-bar></app-left-nav-bar>
 
+<body>
 <router-outlet class="main"></router-outlet>
-<app-footer [menu]="menu"></app-footer>
 </body>
+</div>
+
+<app-footer [menu]="menu"></app-footer>
