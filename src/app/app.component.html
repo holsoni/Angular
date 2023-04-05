@@ -3,11 +3,11 @@
             (event)="show()">
 </app-header>
 
-<div style="display: flex; flex-wrap: wrap;">
+<div style="display: flex;   background-color:#fafafa;" fxLayout.gt-xs="row" fxLayout.lt-sm="column">
 
-<app-left-nav-bar></app-left-nav-bar>
+<app-left-nav-bar ></app-left-nav-bar>
+  <body fxLayout.lt-sm="column" style="margin-top:20px" fxLayoutAlign.lt-sm="center">
 
-<body>
 <router-outlet class="main"></router-outlet>
 </body>
 </div>

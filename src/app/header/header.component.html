@@ -7,13 +7,16 @@
 </div>
 </header>-->
 
-<header style="top:0;left:0" fxLayout="row" fxLayoutAlign="space-between center" fxFill  >
-  <div fxLayoutAlign="start center">
-    <img fxFlex = "10" (click)="onEvent()" class="logo" src="https://edmundston.ca/download_file/view_inline/2137">
-    <div fxFlex="grow" class="name">{{siteName}}</div>
+<header style="top:0;left:0" fxLayout="row" fxLayoutAlign="space-between center"  >
+  <div class="name" fxLayoutAlign="start center">
+    <img fxHide.lt-sm="true" class="bigImg" (click)="onEvent()"  src="https://edmundston.ca/download_file/view_inline/2137">
+    <img fxHide.gt-xs="true" class="smallImg" (click)="onEvent()" src="https://edmundston.ca/download_file/view_inline/2137">
+    <div class="bigLogo" fxHide.lt-sm="true"  >{{siteName}}</div>
+    <div class="smallLogo" fxHide.gt-xs="true" >{{siteName}}</div>
+
   </div>
   <div fxLayout="row"  class="user" >
-    <img fxFlex = "1vw " src="https://icon-library.com/images/users-icon-png/users-icon-png-3.jpg">
+    <img fxFlex = "10px" src="https://icon-library.com/images/users-icon-png/users-icon-png-3.jpg">
     <a href="#">{{userName}}</a>
   </div>
 </header>

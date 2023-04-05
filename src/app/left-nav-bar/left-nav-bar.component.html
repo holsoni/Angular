@@ -27,21 +27,13 @@
     <li><a routerLink="/about" routerLinkActive="active">About</a></li>
   </ul>
 </nav>-->
-
-<nav fxLayout="row" fxFlex="150"   fxLayout="row" fxFlex="100%"  fxHide.gt-xs>
-  <ul style="padding: 0; margin: 0; display: flex; list-style: none;">
+<div fxLayoutAlign="center" fxFill>
+  <ul  fxLayoutAlign.lt-sm="space-around center" fxLayout.lt-sm="row" fxLayout.gt-xs="column" style="display:flex; padding:10px; list-style: none;">
     <li style="margin-right: 20px;"><a routerLink="/home" routerLinkActive="active" >Home</a></li>
     <li style="margin-right: 20px;"><a [routerLink]="['/blogs',1]" routerLinkActive="active">Blogs</a></li>
     <li style="margin-right: 20px;"><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
+    <li style="margin-right: 20px;"><a routerLink="/rating" routerLinkActive="active">Top 10 </a></li>
+    <li style="margin-right: 20px;"><a routerLink="/advice" routerLinkActive="active">Advice</a></li>
     <li><a routerLink="/about" routerLinkActive="active">About</a></li>
   </ul>
-</nav>
-
-<nav fxLayout="column" fxFlexFill fxFlex = "10vw" fxLayoutAlign="start center" fxHide.lt-sm>
-  <ul style="padding: 0; margin: 0; list-style: none;">
-    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-    <li><a [routerLink]="['/blogs',1]" routerLinkActive="active">Blogs</a></li>
-    <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
-    <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-  </ul>
-</nav>
+  </div>

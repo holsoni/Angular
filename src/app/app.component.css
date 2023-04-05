@@ -1,31 +1,4 @@
 body{
   display: flex;
-}
-
-button{
-  position: absolute;
-  margin-top: 101px;
-  margin-left:1640px;
-  width:90px;
-  height:40px;
-  background-color: #374821;
-  color: #eeeeee;
-}
-nav{display: inline-flex}
-.items p{
-margin: -1px
-}
-.items{
-  position: fixed;
-  margin-top:100px;
-margin-left: 300px;
-}
-
-.view{
-  margin-left: 200px;
-  margin-top: 100px;
-}
-
-ul{
-  display: list-item;
+  background-color:#fafafa;
 }

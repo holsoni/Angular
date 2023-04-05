@@ -1,1 +1,14 @@
-<p>gallery works!</p>
+<div fxFlexOffset="10" fxLayoutAlign="center" fxFlex.lt-sm="80"
+     fxLayout.gt-xs="row wrap" fxLayout.lt-sm="column" fxLayoutGap="16px"
+     style="margin-bottom:16px">
+  <ng-container *ngFor="let place of places">
+    <mat-card fxFlex.gt-sm="30" >
+      <img mat-card-image src="{{place.img}}">
+      <mat-card-content >
+        <h1>{{place.name}}</h1>
+        <p>{{place.place}}</p>
+        <p>{{place.description}}</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

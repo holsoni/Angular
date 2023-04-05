@@ -1,25 +1,30 @@
-
-<div class = "data">
-  <p>blogs works!</p>
-  <td>
-  <tr>
-    <th>Name</th>
-    <td>{{user.name}} {{user.lastname}}</td>
-  </tr>
-    <tr>
-  <th>Date of Birth</th>
-      <td>{{user.dateOfBirth|date:'dd.MM.YYYY'}}</td>
-  </tr>
-    <tr>
-      <th>Salary</th>
-      <td>{{user.salary | currency:'USD'}}</td>
-    </tr>
-    <tr>
-      <th>Work Hours</th>
-      <td>{{user.workingHours | hoursPipe}}</td>
-    </tr>
-  </td>
-
-</div>
-
-
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+  <mat-tab label="Hiking">
+    <div fxLayout="column">
+      <h2>Best Hiking Trails in the World</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus est quis est sollicitudin, vel fermentum quam aliquam. Integer malesuada, urna vel fermentum vestibulum, urna turpis gravida est, non dapibus mauris nulla vitae enim. Vivamus nec consectetur enim. Nullam blandit eros magna, sed fringilla arcu vestibulum a.</p>
+      <p>Sed pharetra lectus ut ultrices finibus. Sed dignissim metus nec purus malesuada egestas. Etiam et ligula suscipit, varius orci ac, tristique velit. Sed vestibulum, ex vel lacinia consectetur, est justo rutrum mauris, id imperdiet mauris ex vitae augue. Sed dictum justo et lobortis dignissim.</p>
+    </div>
+  </mat-tab>
+  <mat-tab label="Nature">
+    <div fxLayout="column">
+      <h2>Discovering Nature's Wonders</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus est quis est sollicitudin, vel fermentum quam aliquam. Integer malesuada, urna vel fermentum vestibulum, urna turpis gravida est, non dapibus mauris nulla vitae enim. Vivamus nec consectetur enim. Nullam blandit eros magna, sed fringilla arcu vestibulum a.</p>
+      <p>Sed pharetra lectus ut ultrices finibus. Sed dignissim metus nec purus malesuada egestas. Etiam et ligula suscipit, varius orci ac, tristique velit. Sed vestibulum, ex vel lacinia consectetur, est justo rutrum mauris, id imperdiet mauris ex vitae augue. Sed dictum justo et lobortis dignissim.</p>
+    </div>
+  </mat-tab>
+  <mat-tab label="Camping">
+    <div fxLayout="column">
+      <h2>The Ultimate Camping Guide</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus est quis est sollicitudin, vel fermentum quam aliquam. Integer malesuada, urna vel fermentum vestibulum, urna turpis gravida est, non dapibus mauris nulla vitae enim. Vivamus nec consectetur enim. Nullam blandit eros magna, sed fringilla arcu vestibulum a.</p>
+      <p>Sed pharetra lectus ut ultrices finibus. Sed dignissim metus nec purus malesuada egestas. Etiam et ligula suscipit, varius orci ac, tristique velit. Sed vestibulum, ex vel lacinia consectetur, est justo rutrum mauris, id imperdiet mauris ex vitae augue. Sed dictum justo et lobortis dignissim.</p>
+    </div>
+  </mat-tab>
+  <mat-tab label="Wildlife">
+    <div fxLayout="column">
+      <h2>Encountering Wildlife on Your Adventures</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus est quis est sollicitudin, vel fermentum quam aliquam. Integer malesuada, urna vel fermentum
+      <p>Sed pharetra lectus ut ultrices finibus. Sed dignissim metus nec purus malesuada egestas. Etiam et ligula suscipit, varius orci ac, tristique velit. Sed vestibulum, ex vel lacinia consectetur, est justo rutrum mauris, id imperdiet mauris ex vitae augue. Sed dictum justo et lobortis dignissim.</p>
+    </div>
+  </mat-tab>
+</mat-tab-group>
