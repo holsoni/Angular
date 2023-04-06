@@ -108,6 +108,7 @@
         <button mat-raised-button *ngSwitchCase="false" color="primary" [disabled]="!profileFbForm.valid" type="submit">Submit</button>
         <button mat-raised-button *ngSwitchCase="true" color="primary" [disabled]="!profileFbForm.valid" type="submit">Sign in</button>
       </div>
+          <mat-progress-bar mode="determinate" [value]="getProgress()"></mat-progress-bar>
         </mat-card-content>
       </mat-card>
     </form>

@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit{
   constructor(private fb:FormBuilder) {
   }
   ngOnInit(){
-
+    this.getProgress();
   }
    validatePassword() : ValidatorFn  {
 
@@ -198,6 +198,22 @@ export class HomeComponent implements OnInit{
 
    wrongDataFalse(){
       this.wrongData = false;
+  }
+
+  getProgress():number{
+    let count = 0;
+    const controls = this.profileFbForm.controls;
+    for (const key in controls) {
+      // @ts-ignore
+      const control =this.profileFbForm.get(key);
+      console.log(control)
+      if (control instanceof FormControl && control.value && control.valid && control.touched) {
+        count++;
+      }
+    }
+    count = 100/7 * count;
+    console.log(count);
+    return count;
   }
 
 }

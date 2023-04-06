@@ -30,6 +30,7 @@ import { InfoComponent } from './info/info.component';
 import { AdvicesComponent } from './advice/advices.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -47,26 +48,27 @@ import {MatTabsModule} from "@angular/material/tabs";
     InfoComponent,
     AdvicesComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
-    MatSlideToggleModule,
-    MatCheckboxModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatCardModule,
-    MatGridListModule,
-    MatListModule,
-    MatTableModule,
-    MatTabsModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatIconModule,
+        FormsModule,
+        MatSlideToggleModule,
+        MatCheckboxModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatCardModule,
+        MatGridListModule,
+        MatListModule,
+        MatTableModule,
+        MatTabsModule,
+        MatProgressBarModule
 
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
