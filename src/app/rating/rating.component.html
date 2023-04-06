@@ -1,0 +1,75 @@
+<!--
+<div fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center">
+  <ng-container *ngFor="let place of rating">
+    <mat-card fxFlex.gt-sm="30" fxFlex.lt-sm="100%">
+      <img mat-card-image [src]="place?.img">
+      <mat-card-content>
+        <h1>{{place?.name}}</h1>
+        <p>{{place?.place}}</p>
+        <p>{{place?.description}}</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>
+-->
+<div style="display: flex" fxLayout="column">
+
+<h1 fxLayoutAlign="center">Top 10 places in the world</h1>
+<mat-list>
+  <div mat-subheader fxLayoutAlign="center">Mountains</div>
+  <mat-list-item *ngFor="let item of mountains">
+    <div fxLayout="row">
+      <img [src]="item.img">
+      <div >
+        <div matListItemTitle>{{item.name}}</div>
+        <div matListItemLine>{{item.place}}</div>
+        <div matListItemLine>{{item.description}}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
+  <div mat-subheader fxLayoutAlign="center">National Parks</div>
+  <mat-list-item *ngFor="let item of nationalParks">
+    <div fxLayout="row">
+      <img [src]="item.img">
+      <div >
+        <div matListItemTitle>{{item.name}}</div>
+        <div matListItemLine>{{item.place}}</div>
+        <div matListItemLine>{{item.description}}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
+  <div mat-subheader fxLayoutAlign="center">Islands</div>
+  <mat-list-item *ngFor="let item of islands">
+    <div fxLayout="row">
+      <img [src]="item.img">
+      <div >
+        <div matListItemTitle>{{item.name}}</div>
+        <div matListItemLine>{{item.place}}</div>
+        <div matListItemLine>{{item.description}}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
+  <div mat-subheader fxLayoutAlign="center">Water</div>
+  <mat-list-item *ngFor="let item of water">
+    <div fxLayout="row">
+      <img [src]="item.img">
+      <div >
+        <div matListItemTitle>{{item.name}}</div>
+        <div matListItemLine>{{item.place}}</div>
+        <div matListItemLine>{{item.description}}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
+
+</div>
