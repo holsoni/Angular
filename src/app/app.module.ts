@@ -26,11 +26,23 @@ import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { RatingComponent } from './rating/rating.component';
 import {MatListModule} from "@angular/material/list";
-import { InfoComponent } from './info/info.component';
 import { AdvicesComponent } from './advice/advices.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatTabsModule} from "@angular/material/tabs";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {RecordService} from "./service/record.service";
+import { HttpClientModule } from '@angular/common/http';
+import { RecordsComponent } from './records/records.component';
+import { RecordsListComponent } from './records/records-list/records-list.component';
+import { RecordsAddComponent } from './records/records-add/records-add.component';
+import { RecordsEditComponent } from './records/records-edit/records-edit.component';
+import { RecordsInfoComponent } from './records/records-info/records-info.component';
+import {NotificationsService} from "./service/notification.service";
+import { SuccessComponent } from './snackbar-items/success/success.component';
+import { ErrorComponent } from './snackbar-items/error/error.component';
+import { WarningComponent } from './snackbar-items/warning/warning.component';
+import {InfoComponent} from "./snackbar-items/info/info.component";
 
 @NgModule({
   declarations: [
@@ -45,9 +57,16 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     PageNotFoundComponent,
     HoursPipePipe,
     RatingComponent,
-    InfoComponent,
     AdvicesComponent,
-  ],
+    RecordsComponent,
+    RecordsListComponent,
+    RecordsAddComponent,
+        RecordsEditComponent,
+        RecordsInfoComponent,
+        SuccessComponent,
+    ErrorComponent,
+        WarningComponent,
+  InfoComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -66,10 +85,13 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
         MatListModule,
         MatTableModule,
         MatTabsModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+      HttpClientModule,
+      MatSnackBarModule
+
 
     ],
-  providers: [],
+  providers: [RecordService,NotificationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

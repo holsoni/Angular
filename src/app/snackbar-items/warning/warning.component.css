@@ -1,0 +1,25 @@
+/*
+::ng-deep .warning :root {
+  --snackbar-background: #ffec1f;
+}
+
+::ng-deep .mat-mdc-snack-bar-container .warning{
+  background-color: transparent;
+}
+
+::ng-deep .mat-mdc-snack-bar-container .mdc-snackbar__surface .warning{
+  background-color: var(--snackbar-background);
+  border-color: var(--snackbar-background);
+  border-radius: 5px;
+}
+*/
+
+img{
+  width: 20px;
+  length:20px;
+}
+div{
+  background-color: yellow;
+  padding:-20px;
+  color:dimgrey;
+}

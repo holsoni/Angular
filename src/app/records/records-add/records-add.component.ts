@@ -1,26 +1,29 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
-  FormGroup,
   ValidationErrors,
   ValidatorFn,
   Validators
 } from "@angular/forms";
-import { v4 as uuidv4 } from 'uuid';
-import {elementAt} from "rxjs";
-import {RecordService} from "../service/record.service";
+import {RecordService} from "../../service/record.service";
+import {v4 as uuidv4} from "uuid";
+import {NotificationsService} from "../../service/notification.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-records-add',
+  templateUrl: './records-add.component.html',
+  styleUrls: ['./records-add.component.css']
 })
-export class HomeComponent implements OnInit{
+export class RecordsAddComponent {
 
   users:any[] = [];
   signedIn:any[] = [];
+  record:any;
+
   checked:boolean = false;
   profileExisting:boolean = false;
   wrongData:boolean = false;
@@ -38,49 +41,60 @@ export class HomeComponent implements OnInit{
   profileFbForm = this.fb.group(
     {id: undefined,
       firstName:['firstName', /*Validators.required*/],
-    lastName:['lastname'/*, Validators.required*/],
-    type:['type'],
-    email:['email'/*, [Validators.required,Validators.email]*/],
-    password:['password'/*, [Validators.required, this.validatePassword()]*/],
-    confirmedPassword:['password'/*,Validators.required*/],
+      lastName:['lastname'/*, Validators.required*/],
+      type:['type'],
+      email:['email'/*, [Validators.required,Validators.email]*/],
+      password:['password'/*, [Validators.required, this.validatePassword()]*/],
+      confirmedPassword:['password'/*,Validators.required*/],
       subjects:this.fb.array([]),
-    description:['description'],
+      description:['description'],
       sex: ['sex'],
       phone: ['phone'/*, Validators.pattern(/^\+380\d{9}$/)*/]
-  }/*,{ validators: this.confirmedPasswordvalidation }*/)
+    }/*,{ validators: this.confirmedPasswordvalidation }*/)
 
 
 
 
-  constructor(private fb:FormBuilder, private service:RecordService) {
-  }
+  constructor(private snackBar: MatSnackBar, private service: RecordService, private fb: FormBuilder,
+              private notifications: NotificationsService) {}
+
   ngOnInit(){
     this.getProgress();
   }
-   validatePassword() : ValidatorFn  {
+  validatePassword() : ValidatorFn  {
 
-  return (c: AbstractControl) => {
-    if(c.value && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[*.?%;_])[A-Za-z\d*.?%;_]{6,}$/.test(c.value)) {
-      return null;
-    } else {
-      return {
-        password: {
-          valid: false
-        }
-      };
-    }
-  }}
+    return (c: AbstractControl) => {
+      if(c.value && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[*.?%;_])[A-Za-z\d*.?%;_]{6,}$/.test(c.value)) {
+        return null;
+      } else {
+        return {
+          password: {
+            valid: false
+          }
+        };
+      }
+    }}
 
 
 
   onSubmit() {
     this.addProfile();
+
+    console.log("value",this.profileFbForm.value);
+
+    this.record = this.profileFbForm.value;
+
+    this.service.create(this.record).subscribe(
+      (response) => {
+        console.log('Record created successfully:', response);
+        this.notifications.showSuccessMessage('Record created successfully');
+      },
+      (error) => {
+        console.error('Error creating record:', error);
+        this.notifications.showErrorMessage('Error creating record');
+      }
+    );
     this.resetForm();
-    let Record = JSON.stringify(this.profileFbForm.value);
-    console.log(Record);
-    //this.service.create(JSON.stringify(this.profileFbForm.value));
-
-
   }
 
   resetForm(){
@@ -88,7 +102,6 @@ export class HomeComponent implements OnInit{
     this.subjects.clear();
     this.checked = false;
     this.profileFbForm.get('confirmedPassword')?.setValidators(Validators.required);
-
   }
 
   get checkBoxValue(){
@@ -104,11 +117,10 @@ export class HomeComponent implements OnInit{
     else{
       let newProfile = this.profileFbForm.value;
       newProfile.id = uuidv4();
-      console.log(newProfile);
+      //console.log(newProfile);
       this.users.push(newProfile);
+      //this.service.create(newProfile);
     }
-
-
   }
   get subjects(){
     return this.profileFbForm.get('subjects') as FormArray;
@@ -140,7 +152,7 @@ export class HomeComponent implements OnInit{
 
 
       if(profile != null){
-       // console.log("checkProfileEx TRUE" );
+        // console.log("checkProfileEx TRUE" );
         this.profileExisting = true;
         this.profileFbForm.get('confirmedPassword')?.clearValidators();
         this.profileFbForm.get('confirmedPassword')?.updateValueAndValidity();
@@ -148,12 +160,12 @@ export class HomeComponent implements OnInit{
         return true;
       }
       else {
-      //  console.log("checkProfileEx FALSE" );
+        //  console.log("checkProfileEx FALSE" );
         this.profileExisting = false;
       }
 
     }
-  //  console.log(this.profileExisting);
+    //  console.log(this.profileExisting);
     return false;
   }
 
@@ -190,8 +202,8 @@ export class HomeComponent implements OnInit{
     return profile.id;
   }
 
-   wrongDataFalse(){
-      this.wrongData = false;
+  wrongDataFalse(){
+    this.wrongData = false;
   }
 
   getProgress():number{
@@ -208,4 +220,9 @@ export class HomeComponent implements OnInit{
     return count;
   }
 
+  checkValid() {
+    console.log("not valid");
+    if(!this.profileFbForm.valid){
+      this.notifications.showWarningMessage("Form not valid!");    }
+  }
 }
